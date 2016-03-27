@@ -27,11 +27,23 @@ def generate_sphere( points, cx, cy, cz, r, step ):
 
 
 def add_torus( points, cx, cy, cz, r0, r1, step ):
-    return 0
+    hold = []
+    generate_torus(hold, cx, cy, cz, r0, r1, step)
+    for x in hold:
+        add_edge(points, x[0], x[1], x[2], x[0], x[1], x[2])
 
 def generate_torus( points, cx, cy, cz, r0, r1, step ):
-    return 0
-
+    t = 0
+    p = 0
+    while p < 1:
+        while t < 1:
+            x = r0 * math.cos(2 * math.pi * t) + cx
+            y = math.cos(2 * math.pi * p) * (r0 * math.sin(2 * math.pi * t) + r1) + cy
+            z = math.sin(2 * math.pi * p) * (r0 * math.sin(2 * math.pi * t) + r1) + cz
+            add_point(points, x, y, z)
+            t += step
+        t = 0
+        p += step
 
 def add_circle( points, cx, cy, cz, r, step ):
     x0 = r + cx
