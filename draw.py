@@ -4,14 +4,15 @@ import math
 
 
 def add_box( points, x, y, z, width, height, depth ):
-    add_point(points, x, y, z)
-    add_point(points, x, y+height, z)
-    add_point(points, x+width, y+height, z)
-    add_point(points, x+width, y, z)
-    add_point(points, x, y, z+depth)
-    add_point(points, x+width, y, z+depth)
-    add_point(points, x, y+height, z+depth)
-    add_point(points, x+width, y+height, z+depth)
+    add_edge(points, x, y, z, x, y, z)
+    add_edge(points, x, y+height, z, x, y+height, z)
+    add_edge(points, x, y, z+depth, x, y, z+depth)
+    add_edge(points, x, y+height, z+depth, x, y+height, z+depth)
+    add_edge(points, x + width, y, z, x + width, y, z)
+    add_edge(points, x + width, y+height, z, x+width, y+height, z)
+    add_edge(points, x + width, y, z+depth, x+width, y, z+depth)
+    add_edge(points, x + width, y+height, z+depth, x+width, y+height, z+depth)
+
 
 def add_sphere( points, cx, cy, cz, r, step ):
     hold = []
@@ -46,7 +47,7 @@ def generate_torus( points, cx, cy, cz, r0, r1, step ):
         while t < 1:
             x = math.cos(2 * math.pi * p) * (r0 * math.sin(2 * math.pi * t) + r1) + cx
             y = r0 * math.cos(2 * math.pi * t) + cy
-            z = math.sin(2 * math.pi * p) * (r0 * math.sin(2 * math.pi * t) + r1)
+            z = math.sin(2 * math.pi * p) * (r0 * math.sin(2 * math.pi * t) + r1) + cz
             add_point(points, x, y, z)
             t += step
         t = 0

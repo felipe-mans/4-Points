@@ -80,6 +80,10 @@ def parse_file( f, points, transform, screen, color ):
         
         elif cmd == 'clear':
             return clear_screen( screen )
+        
+        elif cmd == '#':
+            pass
+
         else:
             print 'Invalid command: ' + cmd
         c+= 1
